@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Eye, Crosshair, Trophy, Timer, Target } from "lucide-react";
+import { Eye, Crosshair, Trophy, Timer, Target, LogOut } from "lucide-react";
 
 const TeamDashboard = () => {
   const navigate = useNavigate();
@@ -129,11 +129,19 @@ const TeamDashboard = () => {
         </Button>
       </motion.div>
 
-      {/* Bottom decorative */}
-      <div className="mt-8 text-center">
+      {/* Bottom */}
+      <div className="mt-8 flex flex-col items-center gap-3">
         <p className="text-[10px] text-muted-foreground/40 tracking-[0.4em] uppercase">
           Hunt {currentStage} of {totalStages} • Stay Sharp
         </p>
+
+        <button
+          onClick={() => { localStorage.removeItem("huntTeam"); navigate("/"); }}
+          className="flex items-center gap-2 text-xs text-muted-foreground/50 hover:text-crimson transition-colors uppercase tracking-wider"
+        >
+          <LogOut className="w-8 h-8" />
+          Logout
+        </button>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Users, Activity, CheckCircle, FileText, Eye, Trophy, MapPin } from "lucide-react";
+import { ArrowLeft, Users, Activity, CheckCircle, FileText, Eye, Trophy, MapPin, LogOut } from "lucide-react";
 
 const stats = [
   { label: "Total Teams", value: 24, icon: Users, color: "text-gold" },
@@ -133,6 +133,13 @@ const OrganizerDashboard = () => {
           <Trophy className="w-4 h-4 mr-2" />
           View Alpha Ranking
         </Button>
+        <button
+          onClick={() => navigate("/")}
+          className="flex items-center justify-center gap-2 text-xs text-muted-foreground/50 hover:text-crimson transition-colors uppercase tracking-wider mt-2 w-full py-2"
+        >
+          <LogOut className="w-3.5 h-3.5" />
+          Logout
+        </button>
       </motion.div>
     </div>
   );
