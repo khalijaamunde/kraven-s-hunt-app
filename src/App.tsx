@@ -7,7 +7,7 @@ import Welcome from "./pages/Welcome";
 import TeamRegistration from "./pages/TeamRegistration";
 import TeamDashboard from "./pages/TeamDashboard";
 import RiddleScreen from "./pages/RiddleScreen";
-import QRScanner from "./pages/QRScanner";
+import HuntScanner from "./pages/HuntScanner.tsx";
 import Leaderboard from "./pages/Leaderboard";
 import OrganizerDashboard from "./pages/OrganizerDashboard";
 import NotFound from "./pages/NotFound";
@@ -25,7 +25,7 @@ const App = () => (
           <Route path="/register" element={<TeamRegistration />} />
           <Route path="/dashboard" element={<TeamDashboard />} />
           <Route path="/riddle" element={<RiddleScreen />} />
-          <Route path="/scanner" element={<QRScanner />} />
+          <Route path="/scanner" element={<HuntScanner />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/organizer" element={<OrganizerDashboard />} />
           <Route path="*" element={<NotFound />} />

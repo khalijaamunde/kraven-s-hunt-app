@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Eye, QrCode, Trophy, Timer, Target } from "lucide-react";
+import { Eye, Crosshair, Trophy, Timer, Target } from "lucide-react";
 
 const TeamDashboard = () => {
   const navigate = useNavigate();
@@ -114,8 +114,8 @@ const TeamDashboard = () => {
           className="w-full"
           onClick={() => navigate("/scanner")}
         >
-          <QrCode className="w-5 h-5 mr-2" />
-          Scan Mark
+          <Crosshair className="w-5 h-5 mr-2" />
+          Scan Target
         </Button>
 
         <Button
