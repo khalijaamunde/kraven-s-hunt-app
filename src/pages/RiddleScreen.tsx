@@ -127,7 +127,7 @@ const RiddleScreen = () => {
                 <p className="text-sm text-foreground/80 font-body">
                   Look for the place where students gather knowledge in quiet rows — the largest building of learning on campus.
                 </p>
-                <p className="text-[10px] text-crimson/70 mt-2 tracking-wider uppercase">Points reduced for this stage</p>
+                <p className="text-[10px] text-muted-foreground/60 mt-2 tracking-wider uppercase">Hint revealed</p>
               </motion.div>
             )}
           </AnimatePresence>
@@ -165,7 +165,7 @@ const RiddleScreen = () => {
             <Button
               variant="huntOutline"
               size="default"
-              className="w-full text-sm border-forest/40 text-forest-deep hover:bg-forest/10"
+              className="w-full text-sm"
               onClick={() => setShowSkipDialog(true)}
             >
               <SkipForward className="w-4 h-4 mr-2" />
@@ -203,7 +203,7 @@ const RiddleScreen = () => {
           <AlertDialogHeader>
             <AlertDialogTitle className="font-display text-gold">Hunter's Insight</AlertDialogTitle>
             <AlertDialogDescription className="text-foreground/70">
-              Using this lifeline will reduce the points for this hunt. Continue?
+              Reveal a hint for the current riddle. Continue?
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
