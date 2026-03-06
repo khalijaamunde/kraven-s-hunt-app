@@ -57,7 +57,7 @@ const Leaderboard = () => {
         </button>
         <div className="flex-1 text-center">
           <Trophy className="w-5 h-5 text-gold mx-auto mb-1" />
-          <h2 className="font-display text-lg text-gold tracking-wider">Alpha Ranking</h2>
+          <h2 className="font-display text-lg text-gold tracking-wider">Pack Ranking</h2>
         </div>
         <div className="w-6" />
       </div>

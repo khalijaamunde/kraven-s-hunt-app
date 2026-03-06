@@ -46,7 +46,7 @@ const Welcome = () => {
           transition={{ delay: 0.8, duration: 1 }}
           className="mt-4 text-lg text-muted-foreground font-body tracking-widest uppercase"
         >
-          "Only the Worthy Survive."
+          "Only the Worthy Will Survive."
         </motion.p>
 
         <motion.div

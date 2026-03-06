@@ -142,7 +142,7 @@ const TeamDashboard = () => {
           onClick={() => navigate("/leaderboard")}
         >
           <Trophy className="w-5 h-5 mr-2" />
-          Alpha Ranking
+          Pack Ranking
         </Button>
       </motion.div>
 
