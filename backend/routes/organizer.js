@@ -67,9 +67,9 @@ router.get('/stats', async (req, res) => {
     try {
         const totalTeams = await Team.countDocuments();
 
-        // Define active as having interacted in the last 15 minutes
-        const fifteenMinsAgo = new Date(Date.now() - 15 * 60 * 1000);
-        const activeTeams = await Team.countDocuments({ lastActive: { $gte: fifteenMinsAgo } });
+        // Define active as having interacted in the last 5 minutes
+        const activeTimeLimit = new Date(Date.now() - 5 * 60 * 1000);
+        const activeTeams = await Team.countDocuments({ lastActive: { $gte: activeTimeLimit } });
 
         // Determine total stages dynamically or hardcode it (assuming 15 from UI)
         const totalStages = 15;

@@ -100,31 +100,6 @@ const OrganizerDashboard = () => {
         </div>
       </motion.div>
 
-      {/* Live Activity */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
-        className="bg-card rounded-lg border border-border p-4 mb-6"
-      >
-        <h3 className="font-display text-sm text-gold tracking-wider mb-3">Live Activity</h3>
-        <div className="space-y-2">
-          {[
-            { team: "Night Stalkers", action: "Scanned Clock Tower — Stage 8 Cleared", time: "2m ago" },
-            { team: "Shadow Pack", action: "Scanning at Library Entrance", time: "5m ago" },
-            { team: "Blood Hounds", action: "Viewing Riddle 6", time: "7m ago" },
-          ].map((activity, i) => (
-            <div key={i} className="flex items-center justify-between py-2 border-b border-border/50 last:border-0">
-              <div>
-                <p className="text-sm text-foreground font-semibold">{activity.team}</p>
-                <p className="text-xs text-muted-foreground">{activity.action}</p>
-              </div>
-              <span className="text-[10px] text-muted-foreground/60">{activity.time}</span>
-            </div>
-          ))}
-        </div>
-      </motion.div>
-
       {/* Action Buttons */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -152,7 +127,7 @@ const OrganizerDashboard = () => {
           Logout
         </button>
       </motion.div>
-    </div>
+    </div >
   );
 };
 

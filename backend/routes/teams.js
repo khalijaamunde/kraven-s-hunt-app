@@ -30,6 +30,7 @@ router.post('/register', async (req, res) => {
             password,
             members,
             contact,
+            lastActive: new Date(),
         });
 
         await team.save();
@@ -44,6 +45,11 @@ router.get('/:id', async (req, res) => {
     try {
         const team = await Team.findById(req.params.id);
         if (!team) return res.status(404).json({ message: 'Team not found' });
+
+        // Update active status when they fetch their dashboard
+        team.lastActive = new Date();
+        await team.save();
+
         res.json(team);
     } catch (error) {
         res.status(500).json({ message: 'Error fetching team', error: error.message });
@@ -63,6 +69,9 @@ router.post('/login', async (req, res) => {
         if (team.password !== password) {
             return res.status(401).json({ message: 'Invalid password' });
         }
+
+        team.lastActive = new Date();
+        await team.save();
 
         res.json({ message: 'Login successful', team });
     } catch (error) {
