@@ -13,6 +13,7 @@ import HuntScanner from "./pages/HuntScanner.tsx";
 import Leaderboard from "./pages/Leaderboard";
 import OrganizerDashboard from "./pages/OrganizerDashboard";
 import NotFound from "./pages/NotFound";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -27,11 +28,16 @@ const App = () => (
           <Route path="/register" element={<TeamRegistration />} />
           <Route path="/organizer-register" element={<OrganizerRegistration />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<TeamDashboard />} />
-          <Route path="/riddle" element={<RiddleScreen />} />
-          <Route path="/scanner" element={<HuntScanner />} />
+
+          {/* Protected Team Routes */}
+          <Route path="/dashboard" element={<ProtectedRoute allowedRole="team"><TeamDashboard /></ProtectedRoute>} />
+          <Route path="/riddle" element={<ProtectedRoute allowedRole="team"><RiddleScreen /></ProtectedRoute>} />
+          <Route path="/scanner" element={<ProtectedRoute allowedRole="team"><HuntScanner /></ProtectedRoute>} />
+
+          {/* Protected Organizer Route */}
+          <Route path="/organizer" element={<ProtectedRoute allowedRole="organizer"><OrganizerDashboard /></ProtectedRoute>} />
+
           <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/organizer" element={<OrganizerDashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
