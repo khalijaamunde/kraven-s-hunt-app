@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 
 const teamSchema = new mongoose.Schema({
     teamName: { type: String, required: true, unique: true },
+    email: { type: String, unique: true, sparse: true, lowercase: true, trim: true },
+    password: { type: String },
     members: [{ type: String }],
     contact: { type: String },
     currentStage: { type: Number, default: 1 },

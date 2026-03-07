@@ -5,39 +5,56 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Users, ArrowLeft } from "lucide-react";
+import { setSession } from "@/lib/auth";
+import { useToast } from "@/hooks/use-toast";
 import { API_BASE_URL } from "@/lib/api";
 
 const TeamRegistration = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     teamName: "",
+    email: "",
+    password: "",
     member1: "",
     member2: "",
     member3: "",
     member4: "",
     contact: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
+
     try {
       const response = await fetch(`${API_BASE_URL}/teams/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData)
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Registration failed');
+        throw new Error(data.message || "Registration failed");
       }
 
-      const team = await response.json();
-      localStorage.setItem("huntTeam", JSON.stringify(team));
+      toast({ title: "Registration Successful", description: "Welcome to the hunt." });
+
+      setSession({
+        email: data.team.email,
+        role: "team",
+        _id: data.team._id,
+        teamName: data.team.teamName,
+      });
+
       navigate("/dashboard");
-    } catch (error) {
-      console.error('Failed to register:', error);
-      alert('Registration failed. Please try again or use a different team name.');
+    } catch (error: any) {
+      toast({ title: "Registration Failed", description: error.message, variant: "destructive" });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -83,6 +100,30 @@ const TeamRegistration = () => {
           />
         </div>
 
+        {/* Email & Password */}
+        <div className="space-y-2">
+          <Label className="text-sm text-gold/80 font-body tracking-wider uppercase">Team Email Address</Label>
+          <Input
+            value={formData.email}
+            onChange={(e) => handleChange("email", e.target.value)}
+            placeholder="team@kravenshunt.com"
+            type="email"
+            required
+            className="bg-muted/50 border-border text-foreground placeholder:text-muted-foreground/50 focus:border-gold/50 focus:ring-gold/20"
+          />
+        </div>
+        <div className="space-y-2">
+          <Label className="text-sm text-gold/80 font-body tracking-wider uppercase">Password</Label>
+          <Input
+            value={formData.password}
+            onChange={(e) => handleChange("password", e.target.value)}
+            placeholder="••••••••"
+            type="password"
+            required
+            className="bg-muted/50 border-border text-foreground placeholder:text-muted-foreground/50 focus:border-gold/50 focus:ring-gold/20"
+          />
+        </div>
+
         {/* Members */}
         {[
           { key: "member1", label: "Alpha (Leader)" },
@@ -104,7 +145,7 @@ const TeamRegistration = () => {
               value={formData[member.key as keyof typeof formData]}
               onChange={(e) => handleChange(member.key, e.target.value)}
               placeholder="Full name"
-              required={i < 2} // Only Alpha and Member 2 are strictly required
+              required
               className="bg-muted/50 border-border text-foreground placeholder:text-muted-foreground/50 focus:border-gold/50 focus:ring-gold/20"
             />
           </motion.div>
@@ -127,7 +168,7 @@ const TeamRegistration = () => {
 
         <div className="pt-4">
           <Button type="submit" variant="hunt" size="xl" className="w-full">
-            Register & Begin
+            Register and Begin
           </Button>
         </div>
       </motion.form>

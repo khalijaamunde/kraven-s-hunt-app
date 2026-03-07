@@ -7,7 +7,7 @@ const router = express.Router();
 // Register a new team
 router.post('/register', async (req, res) => {
     try {
-        const { teamName, member1, member2, member3, member4, contact } = req.body;
+        const { teamName, email, password, member1, member2, member3, member4, contact } = req.body;
 
         // Filter out empty members
         const members = [member1, member2, member3, member4].filter(m => m && m.trim() !== '');
@@ -17,14 +17,23 @@ router.post('/register', async (req, res) => {
             return res.status(400).json({ message: 'Team name already exists' });
         }
 
+        if (email) {
+            const existingEmail = await Team.findOne({ email });
+            if (existingEmail) {
+                return res.status(400).json({ message: 'Email already registered' });
+            }
+        }
+
         const team = new Team({
             teamName,
+            email,
+            password,
             members,
             contact,
         });
 
         await team.save();
-        res.status(201).json(team);
+        res.status(201).json({ message: 'Registration successful', team });
     } catch (error) {
         res.status(500).json({ message: 'Error registering team', error: error.message });
     }
@@ -38,6 +47,26 @@ router.get('/:id', async (req, res) => {
         res.json(team);
     } catch (error) {
         res.status(500).json({ message: 'Error fetching team', error: error.message });
+    }
+});
+
+// Login team
+router.post('/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        const team = await Team.findOne({ email });
+        if (!team) {
+            return res.status(404).json({ message: 'Team not found with this email' });
+        }
+
+        if (team.password !== password) {
+            return res.status(401).json({ message: 'Invalid password' });
+        }
+
+        res.json({ message: 'Login successful', team });
+    } catch (error) {
+        res.status(500).json({ message: 'Error logging in', error: error.message });
     }
 });
 

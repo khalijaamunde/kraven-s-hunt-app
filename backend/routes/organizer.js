@@ -1,8 +1,53 @@
 import express from 'express';
 import Team from '../models/Team.js';
 import Riddle from '../models/Riddle.js';
+import Organizer from '../models/Organizer.js';
 
 const router = express.Router();
+
+// Register a new organizer
+router.post('/register', async (req, res) => {
+    try {
+        const { organizerName, email, password, contact } = req.body;
+
+        const existingOrganizer = await Organizer.findOne({ email });
+        if (existingOrganizer) {
+            return res.status(400).json({ message: 'Email already registered' });
+        }
+
+        const organizer = new Organizer({
+            organizerName,
+            email,
+            password,
+            contact
+        });
+
+        await organizer.save();
+        res.status(201).json({ message: 'Registration successful', organizer });
+    } catch (error) {
+        res.status(500).json({ message: 'Error registering organizer', error: error.message });
+    }
+});
+
+// Login organizer
+router.post('/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        const organizer = await Organizer.findOne({ email });
+        if (!organizer) {
+            return res.status(404).json({ message: 'Organizer not found with this email' });
+        }
+
+        if (organizer.password !== password) {
+            return res.status(401).json({ message: 'Invalid password' });
+        }
+
+        res.json({ message: 'Login successful', organizer });
+    } catch (error) {
+        res.status(500).json({ message: 'Error logging in', error: error.message });
+    }
+});
 
 // Get leaderboard
 router.get('/leaderboard', async (req, res) => {

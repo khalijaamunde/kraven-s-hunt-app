@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Shield, Crosshair } from "lucide-react";
+import { Shield, Crosshair, LogIn } from "lucide-react";
 import jungleBg from "@/assets/jungle-bg.png";
 
 const Welcome = () => {
@@ -68,11 +68,21 @@ const Welcome = () => {
           <Button
             variant="huntOutline"
             size="lg"
-            onClick={() => navigate("/organizer")}
+            onClick={() => navigate("/organizer-register")}
             className="w-full"
           >
             <Crosshair className="w-4 h-4 mr-2" />
             Hunter's Control
+          </Button>
+
+          <Button
+            variant="huntOutline"
+            size="lg"
+            onClick={() => navigate("/login")}
+            className="w-full border-crimson/30 text-crimson hover:bg-crimson/10 hover:border-crimson/50"
+          >
+            <LogIn className="w-4 h-4 mr-2" />
+            Hunter Login
           </Button>
         </motion.div>
 

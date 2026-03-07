@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Welcome from "./pages/Welcome";
 import TeamRegistration from "./pages/TeamRegistration";
+import OrganizerRegistration from "./pages/OrganizerRegistration";
+import Login from "./pages/Login";
 import TeamDashboard from "./pages/TeamDashboard";
 import RiddleScreen from "./pages/RiddleScreen";
 import HuntScanner from "./pages/HuntScanner.tsx";
@@ -23,6 +25,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/register" element={<TeamRegistration />} />
+          <Route path="/organizer-register" element={<OrganizerRegistration />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<TeamDashboard />} />
           <Route path="/riddle" element={<RiddleScreen />} />
           <Route path="/scanner" element={<HuntScanner />} />

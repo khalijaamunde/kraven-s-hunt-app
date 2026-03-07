@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Eye, Crosshair, Trophy, Timer, Target, LogOut } from "lucide-react";
+import { logout } from "@/lib/auth";
 
 import { API_BASE_URL } from "@/lib/api";
 
@@ -153,7 +154,7 @@ const TeamDashboard = () => {
         </p>
 
         <button
-          onClick={() => { localStorage.removeItem("huntTeam"); navigate("/"); }}
+          onClick={() => { logout(); navigate("/"); }}
           className="flex items-center gap-2 text-xs text-muted-foreground/50 hover:text-crimson transition-colors uppercase tracking-wider"
         >
           <LogOut className="w-8 h-8" />
