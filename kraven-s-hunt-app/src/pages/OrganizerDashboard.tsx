@@ -107,7 +107,7 @@ const OrganizerDashboard = () => {
         transition={{ delay: 0.6 }}
         className="space-y-3"
       >
-        <Button variant="hunt" size="lg" className="w-full">
+        <Button onClick={() => navigate("/organizer/riddles")} variant="hunt" size="lg" className="w-full">
           <FileText className="w-4 h-4 mr-2" />
           Manage 15 Riddles
         </Button>

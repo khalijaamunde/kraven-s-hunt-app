@@ -14,6 +14,7 @@ import Leaderboard from "./pages/Leaderboard";
 import OrganizerDashboard from "./pages/OrganizerDashboard";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ManageRiddles from "./pages/ManageRiddles";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ const App = () => (
 
           {/* Protected Organizer Route */}
           <Route path="/organizer" element={<ProtectedRoute allowedRole="organizer"><OrganizerDashboard /></ProtectedRoute>} />
+          <Route path="/organizer/riddles" element={<ProtectedRoute allowedRole="organizer"><ManageRiddles /></ProtectedRoute>} />
 
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="*" element={<NotFound />} />
